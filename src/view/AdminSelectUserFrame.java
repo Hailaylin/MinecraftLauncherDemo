@@ -4,11 +4,11 @@ import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class SelectFrame implements KeyListener {
+public class AdminSelectUserFrame implements KeyListener {
     JTextField selectuse_1 = new JTextField();
     private static String s;
     JFrame frame = new JFrame("查询用户");
-    SelectFrame(){
+    AdminSelectUserFrame(){
         frame.setLayout(null);
         frame.setBounds(160, 200, 450, 100);
 

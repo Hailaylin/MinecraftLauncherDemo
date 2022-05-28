@@ -5,12 +5,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class people_data implements ActionListener {
+public class VisitorFrame implements ActionListener {
     //游客
     JButton buttonregister_2 = new JButton("退出");
     JButton buttonregister_1 = new JButton("游戏启动");
     JButton newmesag = new JButton("新消息");
-    people_data() {
+    VisitorFrame() {
         JFrame frame = new JFrame();
         frame.setLayout(null);
         JLabel userStr = new JLabel("用户名:");

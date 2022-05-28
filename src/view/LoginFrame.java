@@ -135,23 +135,21 @@ public class LoginFrame extends JFrame implements ItemListener, ActionListener {
             if(userIdentity == -1){
                 JOptionPane.showMessageDialog(null, "您输入的用户名或密码错误", "错误", JOptionPane.ERROR_MESSAGE);
             }
-
-
             if (selectFrameType == 2 && userIdentity == 2)//判断里加一个判断条件：数据库中是权限对应数值是否与indentity相等
             {
-                new AdministratorFrame(loginDao.getUser());//管理员窗口
+                new AdministratorFrame();//管理员窗口
                 setVisible(false);
                 System.out.println("管理员窗口");
             }
             else if (selectFrameType == 1 && userIdentity >= 1)     // 权限继承，管理员身份可以进入任何窗体
             {
-                new normaluser_data(loginDao.getUser());//普通用户窗口
+                new normaluser_data();//普通用户窗口
                 setVisible(false);
                 System.out.println("普通用户窗口");
             }
             else if (selectFrameType == 0 && userIdentity >=0)
             {
-                new people_data();//游客用户窗口
+                new VisitorFrame();//游客用户窗口
                 setVisible(false);
                 System.out.println("游客用户窗口");
             }
@@ -160,13 +158,13 @@ public class LoginFrame extends JFrame implements ItemListener, ActionListener {
         else if (e.getSource() == exitButton)
         {
             dispose();
-            System.exit(0);//退出界面
+            System.exit(0);
         }
 
         else if (e.getSource() == registerButton)
         {
             this.dispose();
-            RegisterFrame registerFrame = new RegisterFrame();//注册界面
+            RegisterFrame registerFrame = new RegisterFrame();
         }
     }
 }

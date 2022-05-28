@@ -12,7 +12,6 @@ public class RegisterDao {
     public RegisterDao(UserModel userIn) {
         dbLoginDB = new RegisterDB();
         user = userIn;
-
     }
 
     // 使用存储的

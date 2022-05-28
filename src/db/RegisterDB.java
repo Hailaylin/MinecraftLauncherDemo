@@ -45,9 +45,9 @@ public class RegisterDB {
             sta.setString(3, user.getEmail());
             sta.setInt(4,user.getIdentity());
             sta.executeUpdate();
-            System.out.println("用户注册成功");
+            System.out.println("普通用户注册成功");
         } catch (SQLException e) {
-            System.out.println("用户注册失败");
+            System.out.println("普通用户注册失败");
             throw new RuntimeException(e);
         }
         sta.close();

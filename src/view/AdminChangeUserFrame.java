@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ChangeFrame implements ActionListener {
+public class AdminChangeUserFrame implements ActionListener {
     JTextField changename_1 = new JTextField();
     JTextField changepassword_1 = new JTextField();
     JTextField changepower_1 = new JTextField();
@@ -15,7 +15,7 @@ public class ChangeFrame implements ActionListener {
     private static String s2;
     private static String s3;
     JFrame frame = new JFrame("修改用户信息");
-    ChangeFrame(){
+    AdminChangeUserFrame(){
         frame.setLayout(null);
         frame.setBounds(160, 200, 300, 250);
 

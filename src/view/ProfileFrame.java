@@ -7,14 +7,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ProfileFrame implements ActionListener {
-
+    UserModel user;
     JButton modifyBotton = new JButton("修改");
     JButton backBotton = new JButton("返回");
     JFrame frame = new JFrame("个人信息");
-    UserModel user;
 
-    ProfileFrame(UserModel user){
-        this.user=user;
+    ProfileFrame(){
         frame.setLayout(null);
         JLabel nameStr = new JLabel("用户名");
         nameStr.setBounds(60, 50, 60, 15);
@@ -51,7 +49,7 @@ public class ProfileFrame implements ActionListener {
         password.setBorder(null);//去边框
         password.setOpaque(false);//透明化
 
-        JLabel powerstr = new JLabel(String.valueOf(user.getIdentity()));
+        JLabel powerstr = new JLabel(user.getIdentity()+"");
         powerstr.setBounds(100, 138, 120, 21);
         frame.add(powerstr);
         powerstr.setBorder(null);//去边框
@@ -74,12 +72,11 @@ public class ProfileFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()== modifyBotton){
             frame.dispose();
-            new Modification(user);//个人信息修改界面
+            new Modification();
         }
         else if (e.getSource()== backBotton){
             frame.setVisible(false);
         }
     }
-
 
 }

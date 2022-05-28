@@ -1,21 +1,20 @@
 package view;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-public class sendmassage implements KeyListener {
+public class AdminChangeNoticeFrame implements KeyListener {
     private static String hostname;
     JTextField messagestr_1 = new JTextField();
     String s;
     String adress;
 
     JFrame frame = new JFrame("发布消息");
-    sendmassage() throws UnknownHostException {
+    AdminChangeNoticeFrame() throws UnknownHostException {
         frame.setLayout(null);
         frame.setBounds(160, 200, 450, 100);
 

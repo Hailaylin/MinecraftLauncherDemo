@@ -1,17 +1,14 @@
 package view;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.File;
-import java.io.IOException;
 
-public class AddFrame implements KeyListener {
+public class AdminAddUserFrame implements KeyListener {
     JTextField adduser_1 = new JTextField();
     private static String s;
     JFrame frame = new JFrame("添加用户");
-    AddFrame(){
+    AdminAddUserFrame(){
         frame.setLayout(null);
         frame.setBounds(160, 200, 450, 100);
 
@@ -51,6 +48,6 @@ public class AddFrame implements KeyListener {
     }
 
     public static void main(String[] args) {
-        new AddFrame();
+        new AdminAddUserFrame();
     }
 }

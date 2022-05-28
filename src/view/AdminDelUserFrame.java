@@ -4,11 +4,11 @@ import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class DelFrame implements KeyListener {
+public class AdminDelUserFrame implements KeyListener {
     JTextField deletuser_1 = new JTextField();
     private static String s;
     JFrame frame = new JFrame("游戏路径");
-    DelFrame(){
+    AdminDelUserFrame(){
         frame.setLayout(null);
         frame.setBounds(160, 200, 450, 100);
 
