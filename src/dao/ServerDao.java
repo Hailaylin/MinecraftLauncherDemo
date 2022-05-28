@@ -8,27 +8,30 @@ import java.sql.SQLException;
 public class ServerDao {
     ServerModel server;
     //公告信息
-    LoginDB logindb;
+    DBUtil dbUtil;
     //数据库连接
     public ServerDao(){
-        logindb=new LoginDB();
+        dbUtil=new DBUtil();
     }
-
 
     /**
      * 获取公告信息
      * */
     public ServerModel getNotice() throws SQLException {
-        server=logindb.getSever();
-
         return server;
     }
 
     /**
-     *
-     * */
-    public int changeNotice(ServerModel ser) throws SQLException {
-        logindb.set_notice(ser);
-        return 0;
+     * 写入公告信息
+     * **/
+    public void setNotice(ServerModel ser) throws SQLException {
+        String sql="insert into servers(notice,serverAddr) values(?,?) ";
+        dbUtil.sta= dbUtil.con.prepareStatement(sql);
+        dbUtil.sta.setString(1,ser.getNotice());
+        dbUtil.sta.setString(2,ser.getServeraddr());
+        dbUtil.sta.executeUpdate();
+        System.out.println("添加公告成功");
+        dbUtil.sta.close();
+        dbUtil.con.close();
     }
 }
