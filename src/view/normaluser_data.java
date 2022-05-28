@@ -73,7 +73,7 @@ public class normaluser_data implements ActionListener {
 
         else if(e.getSource()==psdoc)
         {
-            new ProfileFrame();
+//            new ProfileFrame(user);   //TODO :这个窗口是否必要？
         }
         else if(e.getSource()==newmesag)
         {

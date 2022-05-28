@@ -8,11 +8,15 @@ import java.awt.event.ActionListener;
 
 public class ProfileFrame implements ActionListener {
     UserModel user;
+
     JButton modifyBotton = new JButton("修改");
     JButton backBotton = new JButton("返回");
     JFrame frame = new JFrame("个人信息");
 
-    ProfileFrame(){
+
+    ProfileFrame(UserModel userModel){
+        user = userModel;
+
         frame.setLayout(null);
         JLabel nameStr = new JLabel("用户名");
         nameStr.setBounds(60, 50, 60, 15);
@@ -72,7 +76,7 @@ public class ProfileFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()== modifyBotton){
             frame.dispose();
-            new Modification();
+            new PersonalProfileModifiy(user);
         }
         else if (e.getSource()== backBotton){
             frame.setVisible(false);

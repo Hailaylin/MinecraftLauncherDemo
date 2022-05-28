@@ -28,4 +28,9 @@ public class LoginDao {
             return -1;
         }
     }
+
+    // 获取保存的用户信息
+    public UserModel getUserModel(){
+        return user;
+    }
 }

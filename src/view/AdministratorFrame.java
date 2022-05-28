@@ -1,5 +1,7 @@
 package view;
 
+import model.UserModel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -16,8 +18,15 @@ public class AdministratorFrame implements ActionListener {
     JButton showMsgBotton = new JButton("新消息");
     JButton addMsgBotton = new JButton("发布消息");
 
+    String showUserName = "";
+
+    UserModel user = new UserModel();
+
     // 窗体结构
-    AdministratorFrame() {
+    AdministratorFrame(UserModel userModel) {
+        user = userModel;
+        showUserName = user.getUserName();
+
         JFrame frame = new JFrame();
         frame.setLayout(null);
         frame.setTitle("管理员窗口");
@@ -25,9 +34,10 @@ public class AdministratorFrame implements ActionListener {
         userStr.setBounds(60, 30, 100, 50);
         frame.add(userStr);
         userStr.setFont(new Font("宋体", Font.PLAIN,16));
-        JLabel userstr= new JLabel();
+        JLabel userstr= new JLabel(showUserName);   //TODO username
         userstr.setBounds(120, 30, 100, 50);
         userstr.setFont(new Font("宋体", Font.PLAIN,16));
+        frame.add(userstr);
 
         profileBotton.setBounds(60, 80, 100, 30);
         frame.add(profileBotton);
@@ -86,7 +96,7 @@ public class AdministratorFrame implements ActionListener {
 
         else if(e.getSource()== profileBotton)
         {
-            new ProfileFrame();
+            new ProfileFrame(user);
          }
         else if(e.getSource()== adminFuncBotton)
          {
@@ -104,11 +114,6 @@ public class AdministratorFrame implements ActionListener {
                  throw new RuntimeException(ex);
              }
          }
-    }
-
-    // 测试窗体功能
-    public static void main(String[] args) {
-        new AdministratorFrame();
     }
 
 }
