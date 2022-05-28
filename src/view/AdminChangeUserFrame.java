@@ -66,6 +66,8 @@ public class AdminChangeUserFrame implements ActionListener {
             s3=changeemail_1.getText();
             //s0-s1分别为用户名，密码，权限，邮件 下面应sql加入数据库
             System.out.println("修改成功");
+            frame.setVisible(false);
+            JOptionPane.showMessageDialog(null,"修改用户信息","修改成功",JOptionPane.NO_OPTION);
 
         }
     }

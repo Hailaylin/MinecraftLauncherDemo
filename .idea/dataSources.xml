@@ -8,12 +8,11 @@
       <jdbc-url>jdbc:mysql://localhost:3306/minecraftlauncherdb</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="mcldb@localhost" uuid="741a7c63-bbc9-4ca4-b90d-1f4df8efecfd">
+    <data-source source="LOCAL" name="player_management@handan.hailay.site" uuid="350adb71-acf6-40d5-a898-bf21fdcc33cf">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
-      <remarks>玩家管理系统课设</remarks>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/player_management</jdbc-url>
+      <jdbc-url>jdbc:mysql://handan.hailay.site:3306/player_management</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
