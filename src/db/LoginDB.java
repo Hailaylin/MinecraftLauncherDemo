@@ -58,7 +58,7 @@ public class LoginDB {
         rs.next();
         // 返回一个user对象，包含所有数据
         UserModel user = new UserModel(
-            rs.getInt(1),
+
             rs.getString(2),
             rs.getString(4),
             rs.getInt(7),

@@ -1,6 +1,7 @@
 package view;
 
-import db.RegisterDB;
+import dao.UpdateDao;
+import model.UserModel;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
@@ -36,16 +37,24 @@ public class AdminAddUserFrame implements KeyListener {
 
     @Override
 
+    /**
+     * 添加玩家：和已有用户重名时，报错
+     * 不报错则添加成功
+     * 创建的用户初始密码:000000,权限：普通用户
+     * */
     public void keyPressed(KeyEvent e) {
         if (e.getKeyChar() == KeyEvent.VK_ENTER){
             s=adduser_1.getText();
             System.out.printf(s);
-            RegisterDB Re = new RegisterDB();
+
             try {
-                Re.insert_user_tourist(s);//初始密码000000
+                UserModel user= new UserModel(s,"000000",1,null);
+                UpdateDao up =new UpdateDao();
+                up.insert(user);
+                //JOptionPane.showMessageDialog(null, "玩家添加成功！","修改成功",JOptionPane.INFORMATION_MESSAGE);
                 frame.dispose();
             } catch (SQLException ex) {
-                throw new RuntimeException(ex);
+                JOptionPane.showMessageDialog(null, "玩家添加失败！(重名)","添加失败",JOptionPane.ERROR_MESSAGE);
             }
             frame.setVisible(false);
         }

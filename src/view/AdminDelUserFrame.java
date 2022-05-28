@@ -1,6 +1,6 @@
 package view;
 
-import db.updata;
+import dao.UpdateDao;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
@@ -36,16 +36,17 @@ public class AdminDelUserFrame implements KeyListener {
     }
 
     @Override
+    //就只做了删除操作，查重时的报错没解决
+    //目前只能做删除，不能查看用户存不存在
     public void keyPressed(KeyEvent e) {
         if (e.getKeyChar() == KeyEvent.VK_ENTER){
             s=deletuser_1.getText();
             System.out.printf(s);
-            updata de=new updata();
+            UpdateDao de=new UpdateDao();
             try {
                 de.delete_name(s);
-
             } catch (SQLException ex) {
-                throw new RuntimeException(ex);
+                JOptionPane.showMessageDialog(null, "玩家不存在！","删除失败",JOptionPane.ERROR_MESSAGE);
             }
             frame.setVisible(false);
         }

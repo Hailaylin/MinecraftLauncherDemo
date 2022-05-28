@@ -1,8 +1,11 @@
 package view;
 
+import dao.UpdateDao;
+
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.sql.SQLException;
 
 public class AdminSelectUserFrame implements KeyListener {
     JTextField selectuse_1 = new JTextField();
@@ -36,8 +39,14 @@ public class AdminSelectUserFrame implements KeyListener {
         if (e.getKeyChar() == KeyEvent.VK_ENTER){
             s=selectuse_1.getText();
             System.out.printf(s);
+            UpdateDao up = new UpdateDao();
+            try {
+                up.select(s);
+                System.out.printf("用户查询成功");//此处应该调用sql进行查询角色
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
 
-            System.out.printf("用户查询成功");//此处应该调用sql进行查询角色
             frame.setVisible(false);
         }
     }

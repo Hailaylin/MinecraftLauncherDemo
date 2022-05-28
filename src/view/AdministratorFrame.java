@@ -92,10 +92,12 @@ public class AdministratorFrame implements ActionListener {
         else if(e.getSource()== profileBotton)
         {
             new ProfileFrame(user);//个人资料界面
+            //已修改好
          }
         else if(e.getSource()== adminFuncBotton)
          {
              new AdministratorModifyFuncs();//管理员功能界面
+
          }
         else if(e.getSource()== showMsgBotton)
          {
