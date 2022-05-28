@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class DBUtil {
-    public static final String url="jdbc:mysql://handan.hailay.site:3306/player_management";
+    public static final String url="jdbc:mysql://localhost:3306/player_management";
     public static final String user ="mcldb";
     public static final String password="mcldbpwd";
     //类第一次加载的时候执行一次
@@ -29,7 +29,7 @@ public class DBUtil {
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-            System.out.println("数据库加载失败"); //TODO w w w w w
+            System.out.println("数据库加载失败");
         }return conn;
     }
     public static void close(Connection conn, PreparedStatement pst) {
