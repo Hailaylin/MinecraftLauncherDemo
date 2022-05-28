@@ -74,7 +74,7 @@ public class ProfileFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()== modifyBotton){
             frame.dispose();
-            new Modification(user);//个人信息修改界面
+//            new Modification(user);//个人信息修改界面
         }
         else if (e.getSource()== backBotton){
             frame.setVisible(false);
