@@ -44,7 +44,7 @@ public class UsersDao {
         return true;
     }
     public void userAdd() throws ClassNotFoundException, SQLException {
-        String sql = "INSERT INTO ttest (name,password)" + "VALUES (?,?)";
+        String sql = "INSERT INTO test (name,password)" + "VALUES (?,?)";
         Connection conn = null;
         try {
             conn = DBUtil.getConn();

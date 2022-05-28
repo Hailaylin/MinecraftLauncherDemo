@@ -53,21 +53,19 @@ public class AdministratorModifyFuncs implements ActionListener {
         }
         else if (e.getSource()==adduser)
         {
-                new AdminAddUserFrame();
+                new AdminAddUserFrame();//增加用户
         }
         else if (e.getSource()==deluser)
         {
-                new AdminDelUserFrame();
+                new AdminDelUserFrame();//删除用户
         }
         else  if(e.getSource()==reuser)
         {
-                 new AdminChangeUserFrame();
+                 new AdminChangeUserFrame();//修改用户信息
         }
         else if (e.getSource()==fouser)
         {
-                new AdminSelectUserFrame();
+                new AdminSelectUserFrame();//查询用户
         }
     }
-
-
 }

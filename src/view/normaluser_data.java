@@ -1,5 +1,7 @@
 package view;
 
+import model.UserModel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,7 +13,9 @@ public class normaluser_data implements ActionListener {
     JButton buttonregister_1 = new JButton("游戏启动");
     JButton psdoc = new JButton("个人资料");
     JButton newmesag = new JButton("新消息");
-    normaluser_data()  {
+    UserModel user;
+    normaluser_data(UserModel user)  {
+        this.user=user;
         JFrame frame = new JFrame();
         frame.setLayout(null);
         JLabel userStr = new JLabel("用户名:");
@@ -68,16 +72,16 @@ public class normaluser_data implements ActionListener {
 
         else if (e.getSource()==buttonregister_1)
         {
-            new Game_address();
+            new Game_address();//游戏启动界面
         }
 
         else if(e.getSource()==psdoc)
         {
-//            new ProfileFrame(user);   //TODO :这个窗口是否必要？
+            new ProfileFrame(user);//个人资料界面
         }
         else if(e.getSource()==newmesag)
         {
-            new newmassage();
+            new newmassage();//消息界面
         }
     }
 }

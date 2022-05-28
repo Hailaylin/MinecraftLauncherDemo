@@ -11,6 +11,7 @@ import java.net.UnknownHostException;
 
 public class AdministratorFrame implements ActionListener {
 //管理员
+    UserModel user;
     final JButton exitBotton = new JButton("退出");
     JButton starGameBotton = new JButton("游戏启动");
     JButton profileBotton = new JButton("个人资料");
@@ -18,15 +19,9 @@ public class AdministratorFrame implements ActionListener {
     JButton showMsgBotton = new JButton("新消息");
     JButton addMsgBotton = new JButton("发布消息");
 
-    String showUserName = "";
-
-    UserModel user = new UserModel();
-
     // 窗体结构
-    AdministratorFrame(UserModel userModel) {
-        user = userModel;
-        showUserName = user.getUserName();
-
+    AdministratorFrame(UserModel user) {
+        this.user=user;
         JFrame frame = new JFrame();
         frame.setLayout(null);
         frame.setTitle("管理员窗口");
@@ -34,10 +29,9 @@ public class AdministratorFrame implements ActionListener {
         userStr.setBounds(60, 30, 100, 50);
         frame.add(userStr);
         userStr.setFont(new Font("宋体", Font.PLAIN,16));
-        JLabel userstr= new JLabel(showUserName);   //TODO username
+        JLabel userstr= new JLabel();
         userstr.setBounds(120, 30, 100, 50);
         userstr.setFont(new Font("宋体", Font.PLAIN,16));
-        frame.add(userstr);
 
         profileBotton.setBounds(60, 80, 100, 30);
         frame.add(profileBotton);
@@ -79,6 +73,7 @@ public class AdministratorFrame implements ActionListener {
         adminFuncBotton.addActionListener(this);
         showMsgBotton.addActionListener(this);
         addMsgBotton.addActionListener(this);
+
     }
 
 
@@ -96,24 +91,27 @@ public class AdministratorFrame implements ActionListener {
 
         else if(e.getSource()== profileBotton)
         {
-            new ProfileFrame(user);
+            new ProfileFrame(user);//个人资料界面
          }
         else if(e.getSource()== adminFuncBotton)
          {
-             new AdministratorModifyFuncs();
+             new AdministratorModifyFuncs();//管理员功能界面
          }
         else if(e.getSource()== showMsgBotton)
          {
-             new newmassage();
+             new newmassage();//新消息界面
          }
         else if(e.getSource()== addMsgBotton)
          {
              try {
-                 new AdminChangeNoticeFrame();
+                 new AdminChangeNoticeFrame();//发布消息界面
              } catch (UnknownHostException ex) {
                  throw new RuntimeException(ex);
              }
          }
     }
+
+    // 测试窗体功能
+
 
 }

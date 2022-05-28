@@ -1,18 +1,19 @@
 package db;
 
+import javax.swing.*;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 //数据库的连接关闭和简单的更新
-class updata {
+public class updata {
     private static String jdbcName ="com.mysql.cj.jdbc.Driver";
-    private static String url ="jdbc:mysql://handan.hailay.site:3306/player_management";
+    private static String url ="jdbc:mysql://localhost:3306/player_management";
     //user名为指定的数据库
     private static String user="mcldb";
     private static String password="mcldbpwd";
-    private java.sql.Connection con;
-    private PreparedStatement sta;
+    static java.sql.Connection con;
+    static PreparedStatement sta;
     public updata(){
         //加载数据库驱动:
         try {
@@ -45,19 +46,19 @@ class updata {
     }
 
 
-    //更改用户名
-    public void update_name(String name,int ID) throws SQLException {
-        String sql_update="update user set userName=? where ID=?";
-        sta=con.prepareStatement(sql_update);
+    //删除用户
+    public void delete_name(String name) throws SQLException {
+        String sql="delete  from user where username=?";
+        sta=con.prepareStatement(sql);
         sta.setString(1,name);
-        sta.setInt(2,ID);
         sta.executeUpdate();
-        System.out.println("更新用户名成功");
+        System.out.println("玩家删除成功");
+        JOptionPane.showMessageDialog(null, "玩家删除成功","删除成功",JOptionPane.INFORMATION_MESSAGE);
         sta.close();
         con.close();
     }
     //更新邮箱
-    public void update_email(String email,int ID) throws SQLException {
+    public static void update_email(String email, int ID) throws SQLException {
         String sql_update="update user set userEmail=? where id=?";
         sta=con.prepareStatement(sql_update);
         sta.setString(1,email);

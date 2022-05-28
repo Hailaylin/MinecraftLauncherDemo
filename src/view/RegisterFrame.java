@@ -83,8 +83,8 @@ public class RegisterFrame extends JFrame {
                     regUser.setUserPasswd(passwd);
                     regUser.setEmail(email);
                     regUser.setIdentity(1); // 默认权限1
-                    RegisterDao registerDao = new RegisterDao(regUser);
-                    registerDao.addUser();
+                    RegisterDao registerDao = new RegisterDao(regUser);//这里要判断重名
+                    registerDao.addUser();//添加用户信息
                     frame.dispose();
                     new LoginFrame().setVisible(true);
                     // 最后弹出注册成功

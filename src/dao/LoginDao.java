@@ -3,6 +3,8 @@ package dao;
 import db.LoginDB;
 import model.UserModel;
 
+import java.sql.PreparedStatement;
+
 public class LoginDao {
     // 目的：存数据库信息到model后有判断用户名密码与数据库是否一致的选项
     UserModel user;         // 用户信息
@@ -29,8 +31,11 @@ public class LoginDao {
         }
     }
 
-    // 获取保存的用户信息
-    public UserModel getUserModel(){
+
+    //获取用户数据
+    public UserModel getUser(){
         return user;
     }
+
+
 }

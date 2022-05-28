@@ -1,8 +1,11 @@
 package view;
 
+import db.updata;
+
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.sql.SQLException;
 
 public class AdminDelUserFrame implements KeyListener {
     JTextField deletuser_1 = new JTextField();
@@ -37,8 +40,13 @@ public class AdminDelUserFrame implements KeyListener {
         if (e.getKeyChar() == KeyEvent.VK_ENTER){
             s=deletuser_1.getText();
             System.out.printf(s);
+            updata de=new updata();
+            try {
+                de.delete_name(s);
 
-            System.out.printf("用户删除成功");//此处应该调用sql进行删除角色
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
             frame.setVisible(false);
         }
     }
