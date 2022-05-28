@@ -5,7 +5,7 @@ import java.sql.*;
 //管理员权限
 class manager {
     private static String jdbcName ="com.mysql.cj.jdbc.Driver";
-    private static String url ="jdbc:mysql://localhost:3306/player_management";
+    private static String url ="jdbc:mysql://handan.hailay.site:3306/player_management";
     //user名为指定的数据库
     private static String user="mcldb";
     private static String password="mcldbpwd";
