@@ -1,16 +1,23 @@
 package view;
 
+import until.DBUtil;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-public class people_data implements ActionListener {
+public class Visiter implements ActionListener {
     //游客
     JButton buttonregister_2 = new JButton("退出");
     JButton buttonregister_1 = new JButton("游戏启动");
     JButton newmesag = new JButton("新消息");
-    people_data() {
+    JScrollPane scpDemo= new JScrollPane();
+    Visiter() {
         JFrame frame = new JFrame();
         frame.setLayout(null);
         JLabel userStr = new JLabel("用户名:");
@@ -53,6 +60,50 @@ public class people_data implements ActionListener {
         buttonregister_2.addActionListener(this);
         newmesag.addActionListener(this);
 
+        JTable tabDemo = new JTable();
+        scpDemo.setBounds(80, 0, 300, 37);
+        frame.add(tabDemo);
+        scpDemo.setOpaque(false);
+        try{
+// 获得连接
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conn = DBUtil.getConn();// 这里用的我自己的DButil
+
+
+// 建立查询条件
+            String sql = "select * from servers";
+            PreparedStatement pstm = conn.prepareStatement(sql);
+// 执行查询
+            ResultSet rs = pstm.executeQuery();
+// 计算有多少条记录
+            int count = 0;
+            while(rs.next()){
+                count++;
+                System.out.println(count);
+            }
+            rs = pstm.executeQuery();
+// 将查询获得的记录数据，转换成适合生成JTable的数据形式
+            Object[][] info = new Object[count][4];
+            count = 0;
+            while(rs.next()){
+                info[count][0] = rs.getString("notice");
+                info[count][1] = rs.getString("serverAddr");
+                count++;
+            }
+// 定义表头
+            String[] title = {"公告","服务器地址"};
+            tabDemo = new JTable(info,title);
+            tabDemo.getTableHeader();
+
+            frame.add(scpDemo);
+            scpDemo.getViewport().add(tabDemo);
+
+
+        }catch(ClassNotFoundException cnfe){
+            JOptionPane.showMessageDialog(null,"数据源错误","错误",JOptionPane.ERROR_MESSAGE);
+        }catch(SQLException sqle){
+            JOptionPane.showMessageDialog(null,"数据操作错误","错误", JOptionPane.ERROR_MESSAGE);
+        }
     }
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == buttonregister_2)
@@ -65,7 +116,7 @@ public class people_data implements ActionListener {
 
         else if (e.getSource()==buttonregister_1)
         {
-            new Game_address();
+            JOptionPane.showMessageDialog(null,"启动成功","启动成功",JOptionPane.NO_OPTION);
         }
 
         else if(e.getSource()==newmesag)

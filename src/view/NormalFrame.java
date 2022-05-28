@@ -7,73 +7,61 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
-public class AdministratorFrame implements ActionListener {
-//管理员
+public class NormalFrame implements ActionListener {
+    //普通用户
     UserModel user;
-    final JButton exitBotton = new JButton("退出");
-    JButton starGameBotton = new JButton("游戏启动");
-    JButton profileBotton = new JButton("个人资料");
-    JButton adminFuncBotton = new JButton("管理员功能");
-
-    JButton addMsgBotton = new JButton("修改消息");
+    JButton buttonregister_2 = new JButton("退出");
+    JButton buttonregister_1 = new JButton("游戏启动");
+    JButton psdoc = new JButton("个人资料");
+    //    JButton newmesag = new JButton("新消息");
     JScrollPane scpDemo= new JScrollPane();
-    // 窗体结构
-    AdministratorFrame(UserModel user) {
+    NormalFrame(UserModel user)  {
         this.user=user;
         JFrame frame = new JFrame();
         frame.setLayout(null);
-        frame.setTitle("管理员窗口");
         JLabel userStr = new JLabel("用户名:");
         userStr.setBounds(60, 30, 100, 50);
         frame.add(userStr);
+
         userStr.setFont(new Font("宋体", Font.PLAIN,16));
-        JLabel userstr= new JLabel();
+        JLabel userstr= new JLabel();//
         userstr.setBounds(120, 30, 100, 50);
-        userstr.setFont(new Font("宋体", Font.PLAIN,16));
+        userstr.setFont(new Font(null, Font.PLAIN,16));
 
-        profileBotton.setBounds(60, 80, 100, 30);
-        frame.add(profileBotton);
-        profileBotton.setBorderPainted(false);//去边框
+        psdoc.setBounds(60, 80, 100, 30);
+        frame.add(psdoc);
+        psdoc.setBorderPainted(false);//去边框
 
-        adminFuncBotton.setBounds(60, 120, 100, 30);
-        frame.add(adminFuncBotton);
-
-        adminFuncBotton.setBorderPainted(false);
-
-        addMsgBotton.setBounds(60, 160, 100, 30);
-        frame.add(addMsgBotton);
-        addMsgBotton.setBorderPainted(false);//去边框
-
-        starGameBotton.setBounds(300, 60, 100, 60);
-        starGameBotton.setFont(new Font(null, 0,16));
-        frame.add(starGameBotton);
-        starGameBotton.setBorderPainted(false);//去边框
+//        newmesag.setBounds(60, 160, 100, 30);
+//        frame.add(newmesag);
+//        newmesag.setBorderPainted(false);
 
 
-        exitBotton.setBounds(300, 150, 100, 60);
-        exitBotton.setFont(new Font(null, 0,16));
-        frame.add(exitBotton);
-        exitBotton.setBorderPainted(false);//去边框
+        buttonregister_1.setBounds(300, 60, 100, 60);
+        buttonregister_1.setFont(new Font(null, 0,16));
+        frame.add(buttonregister_1);
+        buttonregister_1.setBorderPainted(false);//去边框
+
+        buttonregister_2.setBounds(300, 150, 100, 60);
+        buttonregister_2.setFont(new Font(null, 0,16));
+        frame.add(buttonregister_2);
+        buttonregister_2.setBorderPainted(false);//去边框
 
 
         frame.setBounds(160, 200, 450, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
-        starGameBotton.addActionListener(this);
-        exitBotton.addActionListener(this);
-        profileBotton.addActionListener(this);
-        adminFuncBotton.addActionListener(this);
-//        showMsgBotton.addActionListener(this);
-        addMsgBotton.addActionListener(this);
+        buttonregister_1.addActionListener(this);
+        buttonregister_2.addActionListener(this);
+        psdoc.addActionListener(this);
+//        newmesag.addActionListener(this);
 
         JTable tabDemo = new JTable();
         scpDemo.setBounds(80, 0, 300, 37);
@@ -119,41 +107,33 @@ public class AdministratorFrame implements ActionListener {
         }catch(SQLException sqle){
             JOptionPane.showMessageDialog(null,"数据操作错误","错误", JOptionPane.ERROR_MESSAGE);
         }
+
     }
 
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == exitBotton) {
+        if (e.getSource() == buttonregister_2)
+        {
+//            dispose();
             System.exit(0);
+
         }
 
-        else if (e.getSource()== starGameBotton)
+
+        else if (e.getSource()==buttonregister_1)
         {
             JOptionPane.showMessageDialog(null,"启动成功","启动成功",JOptionPane.NO_OPTION);
-         }
+        }
 
-        else if(e.getSource()== profileBotton)
+        else if(e.getSource()==psdoc)
         {
-            new ProfileFrame(user);//个人资料界面
-         }
-        else if(e.getSource()== adminFuncBotton)
-         {
-             new AdministratorModifyFuncs();//管理员功能界面
-         }
+//            new ProfileFrame();
+            //todo 注意此处修改
+        }
 
-        else if(e.getSource()== addMsgBotton)
-         {
-             try {
-                 new AdminChangeNoticeFrame();//发布消息界面
-             } catch (UnknownHostException ex) {
-                 throw new RuntimeException(ex);
-             }
-         }
     }
-
-    // 测试窗体功能
 
 
 }

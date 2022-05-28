@@ -3,14 +3,17 @@ package view;
 import db.updata;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.sql.SQLException;
 
-public class AdminDelUserFrame implements KeyListener {
+public class AdminDelUserFrame implements ActionListener {
     JTextField deletuser_1 = new JTextField();
     private static String s;
-    JFrame frame = new JFrame("游戏路径");
+    JFrame frame = new JFrame("删除用户");
+    JButton chick = new JButton("确定");
     AdminDelUserFrame(){
         frame.setLayout(null);
         frame.setBounds(160, 200, 450, 100);
@@ -20,27 +23,24 @@ public class AdminDelUserFrame implements KeyListener {
         frame.add(addrestr);
         frame.setLocationRelativeTo(null);
 
+        chick.setBounds(350,20,68,21);
+        frame.add(chick);
+        frame.setLocationRelativeTo(null);
 
-        deletuser_1.setBounds(90, 20, 300, 21);
+        deletuser_1.setBounds(90, 20, 250, 21);
         frame.add(deletuser_1);
 
 
         frame.setVisible(true);
-        deletuser_1.addKeyListener(this);
+        chick.addActionListener(this);
 
     }
-
     @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        if (e.getKeyChar() == KeyEvent.VK_ENTER){
-            s=deletuser_1.getText();
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == chick) {
+            s = deletuser_1.getText();
             System.out.printf(s);
-            updata de=new updata();
+            updata de = new updata();
             try {
                 de.delete_name(s);
 
@@ -48,11 +48,10 @@ public class AdminDelUserFrame implements KeyListener {
                 throw new RuntimeException(ex);
             }
             frame.setVisible(false);
+            JOptionPane.showMessageDialog(null,"删除用户","删除成功",JOptionPane.NO_OPTION);
         }
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
 
     }
+
+
 }

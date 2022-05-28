@@ -145,13 +145,13 @@ public class LoginFrame extends JFrame implements ItemListener, ActionListener {
             }
             else if (selectFrameType == 1 && userIdentity >= 1)     // 权限继承，管理员身份可以进入任何窗体
             {
-                new normaluser_data(loginDao.getUser());//普通用户窗口
+                new NormalFrame(loginDao.getUser());//普通用户窗口
                 setVisible(false);
                 System.out.println("普通用户窗口");
             }
             else if (selectFrameType == 0 && userIdentity >=0)
             {
-                new people_data();//游客用户窗口
+                new Visiter();//游客用户窗口
                 setVisible(false);
                 System.out.println("游客用户窗口");
             }
