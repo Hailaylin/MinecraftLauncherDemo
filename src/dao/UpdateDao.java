@@ -1,13 +1,22 @@
 package dao;
 
+import model.UserModel;
+
 import javax.swing.*;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class UpdateDao {
     DBUtil dbUtil;
+    UserModel user;
+    java.sql.Connection con;
+    PreparedStatement sta;
 
     public UpdateDao() {
         dbUtil = new DBUtil();
+        user = new UserModel();
+        con = dbUtil.con;
+        sta = dbUtil.sta;
     }
 
     //更改密码
@@ -21,7 +30,6 @@ public class UpdateDao {
         sta.close();
         con.close();
     }
-
 
     //删除用户
     public void delete_name(String name) throws SQLException {
