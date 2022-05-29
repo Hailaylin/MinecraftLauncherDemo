@@ -79,7 +79,9 @@ public class AdminChangeUserFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "玩家信息修改失败！(玩家不存在)","修改失败",JOptionPane.ERROR_MESSAGE);
             }
             System.out.println("修改成功");
-
+            frame.setVisible(false);
+            JOptionPane.showMessageDialog(null,"修改用户信息","修改成功",JOptionPane.NO_OPTION);
+            //todo 修改用户信息
         }
     }
 }

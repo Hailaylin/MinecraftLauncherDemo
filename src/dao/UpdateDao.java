@@ -4,15 +4,22 @@ import model.UserModel;
 
 import javax.swing.*;
 import java.sql.PreparedStatement;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class UpdateDao {
     DBUtil dbUtil;
+    UserModel user;
+    java.sql.Connection con;
+    PreparedStatement sta;
 
     public UpdateDao() {
         dbUtil = new DBUtil();
+        user = new UserModel();
+        con = dbUtil.con;
+        sta = dbUtil.sta;
     }
 
     //创建用户
