@@ -54,18 +54,22 @@ public class AdministratorModifyFuncs implements ActionListener {
         else if (e.getSource()==adduser)
         {
                 new AdminAddUserFrame();//增加用户
+            //添加不重名用户，重名弹出提示信息
         }
         else if (e.getSource()==deluser)
         {
                 new AdminDelUserFrame();//删除用户
+            //重名时删除出错，弹出提示信息
         }
         else  if(e.getSource()==reuser)
         {
                  new AdminChangeUserFrame();//修改用户信息
+            //不存在的暂时没考虑，可以修改存在的用户名信息
         }
         else if (e.getSource()==fouser)
         {
                 new AdminSelectUserFrame();//查询用户
+            //查询成功和失败都弹出消息
         }
     }
 }

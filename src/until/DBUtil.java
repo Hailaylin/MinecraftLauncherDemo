@@ -20,6 +20,8 @@ public class DBUtil {
             e.printStackTrace();
         }//有可能报错
     }
+
+
     //2.数据库链接
     public static Connection getConn() {
         Connection conn =null;
@@ -44,8 +46,5 @@ public class DBUtil {
         }
     }
 
-//    public static void main(String[] args) {
-//        Connection conn=DBUtil.getConn();
-//        System.out.println(conn);
 
 }

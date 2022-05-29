@@ -1,8 +1,12 @@
 package view;
 
+import dao.UpdateDao;
+import model.UserModel;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class AdminChangeUserFrame implements ActionListener {
     JTextField changename_1 = new JTextField();
@@ -12,7 +16,7 @@ public class AdminChangeUserFrame implements ActionListener {
     JButton tj=new JButton("提交");
     private static String s0;
     private static String s1;
-    private static String s2;
+    private static int s2;
     private static String s3;
     JFrame frame = new JFrame("修改用户信息");
     AdminChangeUserFrame(){
@@ -62,13 +66,22 @@ public class AdminChangeUserFrame implements ActionListener {
         if (e.getSource()==tj){
             s0=changename_1.getText();
             s1=changepassword_1.getText();
-            s2=changepower_1.getText();
+            s2= Integer.parseInt (changepower_1.getText());
             s3=changeemail_1.getText();
-            //s0-s1分别为用户名，密码，权限，邮件 下面应sql加入数据库
+            //s0-s1分别为用户名，密码，权限，邮件 下面应sql加入数据库\
+            UserModel user = new UserModel(s0,s1,s2,s3);
+            UpdateDao up =new UpdateDao();
+            try {
+                up.updata(user);
+                JOptionPane.showMessageDialog(null, "玩家信息修改成功！","修改成功",JOptionPane.INFORMATION_MESSAGE);
+                frame.dispose();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "玩家信息修改失败！(玩家不存在)","修改失败",JOptionPane.ERROR_MESSAGE);
+            }
             System.out.println("修改成功");
             frame.setVisible(false);
             JOptionPane.showMessageDialog(null,"修改用户信息","修改成功",JOptionPane.NO_OPTION);
-
+            //todo 修改用户信息
         }
     }
 }

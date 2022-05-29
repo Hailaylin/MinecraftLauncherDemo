@@ -1,10 +1,12 @@
 package view;
 
+import dao.UpdateDao;
 import model.UserModel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class PersonalProfileModifiy implements ActionListener {
     JTextField newEmailJT = new JTextField();
@@ -63,11 +65,35 @@ public class PersonalProfileModifiy implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()== changeEmailButton)//修改电子邮箱
         {
+            user.setEmail(newEmailJT.getText());
+            UpdateDao up=new UpdateDao();
+            try {
+                up.updata(user);
+                JOptionPane.showMessageDialog(null, "邮箱修改成功！","修改成功",JOptionPane.INFORMATION_MESSAGE);
+                frame.dispose();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "邮箱修改失败!","修改失败",JOptionPane.ERROR_MESSAGE);
 
+            }
         }
         else if(e.getSource()== changePwdButton)//修改密码 要判断输入的旧密码与数据库中密码一直再进行新密码的写入
         {
+            if(user.getUserPasswd().equals(oldPwdJT.getText())){
+                user.setUserPasswd(newPwdJT.getText());
+                //连接数据库上传修改信息
+                try {
+                    UpdateDao up=new UpdateDao();
+                    up.updata(user);
+                    JOptionPane.showMessageDialog(null, "密码修改成功！","修改成功",JOptionPane.INFORMATION_MESSAGE);
+                    frame.dispose();
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null, "密码修改失败！","修改失败",JOptionPane.ERROR_MESSAGE);
 
+                }
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "旧密码不正确！","密码错误",JOptionPane.ERROR_MESSAGE);
+            }
         }
         else if (e.getSource()== backButton)
         {

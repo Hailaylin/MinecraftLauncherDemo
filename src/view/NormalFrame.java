@@ -1,5 +1,6 @@
 package view;
 
+import model.UserModel;
 import until.DBUtil;
 
 import javax.swing.*;
@@ -13,30 +14,28 @@ import java.sql.SQLException;
 
 public class NormalFrame implements ActionListener {
     //普通用户
-     JButton buttonregister_2 = new JButton("退出");
+    UserModel user;
+    JButton buttonregister_2 = new JButton("退出");
     JButton buttonregister_1 = new JButton("游戏启动");
     JButton psdoc = new JButton("个人资料");
-//    JButton newmesag = new JButton("新消息");
+    //    JButton newmesag = new JButton("新消息");
     JScrollPane scpDemo= new JScrollPane();
-    NormalFrame()  {
-        JFrame frame = new JFrame();
+    NormalFrame(UserModel user)  {
+        this.user=user;
+        JFrame frame = new JFrame("普通用户窗体");
         frame.setLayout(null);
         JLabel userStr = new JLabel("用户名:");
         userStr.setBounds(60, 30, 100, 50);
         frame.add(userStr);
 
         userStr.setFont(new Font("宋体", Font.PLAIN,16));
-        JLabel userstr= new JLabel();//
+        JLabel userstr= new JLabel(user.getUserName());//
         userstr.setBounds(120, 30, 100, 50);
         userstr.setFont(new Font(null, Font.PLAIN,16));
 
         psdoc.setBounds(60, 80, 100, 30);
         frame.add(psdoc);
         psdoc.setBorderPainted(false);//去边框
-
-//        newmesag.setBounds(60, 160, 100, 30);
-//        frame.add(newmesag);
-//        newmesag.setBorderPainted(false);
 
 
         buttonregister_1.setBounds(300, 60, 100, 60);
@@ -121,20 +120,16 @@ public class NormalFrame implements ActionListener {
 
         else if (e.getSource()==buttonregister_1)
         {
-            JOptionPane.showMessageDialog(null,"启动成功","启动成功",JOptionPane.NO_OPTION);
+            JOptionPane.showMessageDialog(null,"游戏启动成功","游戏启动成功",JOptionPane.NO_OPTION);
         }
 
         else if(e.getSource()==psdoc)
         {
-            new ProfileFrame();
+            new ProfileFrame(user);
+            //todo 注意此处修改
         }
-//        else if(e.getSource()==newmesag)
-//        {
-//            new newmassage();
-//        }
+
     }
 
-    public static void main(String[] args) {
-        new NormalFrame();
-    }
+
 }

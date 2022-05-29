@@ -1,10 +1,13 @@
 package view;
 
+import dao.UpdateDao;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.sql.SQLException;
 
 public class AdminSelectUserFrame implements  ActionListener {
     JTextField selectuse_1 = new JTextField();
@@ -32,7 +35,6 @@ public class AdminSelectUserFrame implements  ActionListener {
         chick.addActionListener(this);
     }
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==chick)
@@ -40,6 +42,14 @@ public class AdminSelectUserFrame implements  ActionListener {
             s=selectuse_1.getText();//s为输入框文本内容
             System.out.printf(s);
             //TODO 查询数据库用户 s为文本框内容即要查询的用户名
+
+            UpdateDao up = new UpdateDao();
+            try {
+                up.select(s);
+                System.out.printf("用户查询成功");//此处应该调用sql进行查询角色
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
 
             frame.setVisible(false);
             JOptionPane.showMessageDialog(null,"用户查询","查询成功",JOptionPane.NO_OPTION);

@@ -1,5 +1,8 @@
 package view;
 
+import dao.ServerDao;
+import model.ServerModel;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -40,24 +43,19 @@ public class AdminChangeNoticeFrame implements ActionListener {
 
     }
 
-
-
-
-
-
-
-
-
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==chick){
             s=messagestr_1.getText();
-//            System.out.printf(s);
-//            System.out.printf(adress);
-            //写入数据库notice=s，服务器地址serviceaddr=adress
+            ServerModel ser = new ServerModel(1,s,"starlin.world");
+            ServerDao serverDao = new ServerDao();
+            try{
+                serverDao.setNotice(ser);
+            }catch (Exception exception){
+                exception.printStackTrace();
+            }
             System.out.printf("写入成功");
-
+//todo 写入数据库
             frame.setVisible(false);
             JOptionPane.showMessageDialog(null,"修改信息","修改成功",JOptionPane.NO_OPTION);
         }

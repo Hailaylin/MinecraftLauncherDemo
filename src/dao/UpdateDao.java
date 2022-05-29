@@ -4,7 +4,10 @@ import model.UserModel;
 
 import javax.swing.*;
 import java.sql.PreparedStatement;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class UpdateDao {
     DBUtil dbUtil;
@@ -19,81 +22,78 @@ public class UpdateDao {
         sta = dbUtil.sta;
     }
 
-    //更改密码
-    public void update_password(String password,int ID) throws SQLException {
-        String sql_update="update user set userPasswd= ?  where id=?";
-        sta=con.prepareStatement(sql_update);
-        sta.setString(1,password);
-        sta.setInt(2,ID);
-        sta.executeUpdate();
-        System.out.println("更新密码成功");
-        sta.close();
-        con.close();
+    //创建用户
+    //最新********误删
+    public int insert(UserModel user) throws SQLException {
+
+        String sql0="select * from user where username= '"+user.getUserName()+"';";
+        System.out.println(sql0);
+        Statement sta1=dbUtil.con.createStatement();
+        ResultSet show= sta1.executeQuery(sql0);
+        if(show.next()){
+            JOptionPane.showMessageDialog(null, "玩家已存在！","请更换用户名",JOptionPane.ERROR_MESSAGE);
+            return 0;
+        }
+        String sql="insert into user(userEmail,userPasswd,identity,userName) values" +
+                "('"+user.getEmail()+"','"+user.getUserPasswd()+"',1,'"+user.getUserName()+"')";
+        System.out.println(sql);
+        Statement sta= dbUtil.con.createStatement();
+        sta.executeUpdate(sql);
+        JOptionPane.showMessageDialog(null, "玩家添加成功！","修改成功",JOptionPane.INFORMATION_MESSAGE);
+        return 0;
     }
 
+
+    //更新用户2.0版本
+    //直接将model中的所有信息进行更新
+    public int updata(UserModel user) throws SQLException {
+        String sql="update user set  userEmail='"+user.getEmail()+"',userPasswd='"
+                +user.getUserPasswd()+"',latestLoginTime=now(),identity="+user.getIdentity()+",LoginTimes=LoginTimes+1" +
+                " where username='"+user.getUserName()+"';";
+        System.out.println(sql);
+        Statement sta= dbUtil.con.createStatement();
+        sta.executeUpdate(sql);
+        return 0;
+    }
+
+
     //删除用户
+    //******这个不能删
+    //判断用户是否存在
     public void delete_name(String name) throws SQLException {
-        String sql="delete  from user where username=?";
-        sta=con.prepareStatement(sql);
-        sta.setString(1,name);
-        sta.executeUpdate();
-        System.out.println("玩家删除成功");
-        JOptionPane.showMessageDialog(null, "玩家删除成功","删除成功",JOptionPane.INFORMATION_MESSAGE);
-        sta.close();
-        con.close();
+        String sql0="select * from user where username= '"+name+"';";
+        System.out.println(sql0);
+        Statement sta1=dbUtil.con.createStatement();
+        ResultSet show= sta1.executeQuery(sql0);
+        if(!show.next()){
+            JOptionPane.showMessageDialog(null, "该玩家不存在！！","删除失败",JOptionPane.ERROR_MESSAGE);
+        }
+        else {
+            String sql = "delete  from user where username=?";
+            PreparedStatement sta;
+            sta = dbUtil.con.prepareStatement(sql);
+            sta.setString(1, name);
+            sta.executeUpdate();
+            JOptionPane.showMessageDialog(null, "玩家删除成功", "删除成功", JOptionPane.INFORMATION_MESSAGE);
+            sta.close();
+        }
+
     }
-    //更新邮箱
-    public static void update_email(String email, int ID) throws SQLException {
-        String sql_update="update user set userEmail=? where id=?";
-        sta=con.prepareStatement(sql_update);
-        sta.setString(1,email);
-        sta.setInt(2,ID);
-        sta.executeUpdate();
-        System.out.println("邮箱更新成功");
-        sta.close();
-        con.close();
-    }
-    //更新用户名用户、密码、邮箱
-    public void update(String name,String password,String email,int ID) throws SQLException {
-        String sql_update="update user set userName=?,userPasswd=? userEmail =? where id=?";
-        sta=con.prepareStatement(sql_update);
-        sta.setString(1,name);
-        sta.setString(2,password);
-        sta.setString(3,email);
-        sta.setInt(4,ID);
-        sta.executeUpdate();
-        System.out.println("更新用户名、密码、邮箱成功");
-        sta.close();
-        con.close();
-    }
-    //变更为管理员权限
-    public void update_admin(int ID) throws SQLException {
-        String sql_update="update user set identity=2 where id=?";
-        sta=con.prepareStatement(sql_update);
-        sta.setInt(1,ID);
-        sta.executeUpdate();
-        System.out.println("权限升级成功");
-        sta.close();
-        con.close();
-    }
-    //变更为普通用户权限
-    public void update_generous(int ID) throws SQLException {
-        String sql_update="update user set identity=1 where id=?";
-        sta=con.prepareStatement(sql_update);
-        sta.setInt(1,ID);
-        sta.executeUpdate();
-        System.out.println("已变更为普通用户");
-        sta.close();
-        con.close();
-    }
-    //变更为游客身份
-    public void update_tourist(int ID) throws SQLException {
-        String sql_update="update user set identity=0 where id=?";
-        sta=con.prepareStatement(sql_update);
-        sta.setInt(1,ID);
-        sta.executeUpdate();
-        System.out.println("已变更为游客");
-        sta.close();
-        con.close();
+
+
+
+    //查询语句
+    //查询有没有相同的用户名
+    public void  select (String name) throws SQLException {
+        String sql="select * from user where username= '"+name+"';";
+        System.out.println(sql);
+        Statement sta=dbUtil.con.createStatement();
+        ResultSet show= sta.executeQuery(sql);
+        if(show.next()){
+            JOptionPane.showMessageDialog(null, "该玩家存在！！","查询结果",JOptionPane.INFORMATION_MESSAGE);
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "该玩家不存在！！","查询结果",JOptionPane.ERROR_MESSAGE);
+        }
     }
 }
